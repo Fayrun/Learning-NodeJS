@@ -1,0 +1,25 @@
+{
+  "name": "learn_nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon --inspect src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "express-handlebars": "^8.0.2",
+    "morgan": "^1.10.1",
+    "nodemon": "^3.1.11"
+  },
+  "devDependencies": {
+    "sass": "^1.97.3"
+  }
+}
