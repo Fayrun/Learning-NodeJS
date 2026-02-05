@@ -11,6 +11,7 @@ const port = process.env.PORT || 3000;
 app.use("/img", express.static(path.join(__dirname, "public/img")));
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "src/public")));
 // HTTP logger
 app.use(morgan("combined"));
 
