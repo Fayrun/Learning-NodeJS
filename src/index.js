@@ -1,25 +1,40 @@
 const express = require("express");
 const morgan = require("morgan");
-const handlebars = require("express-handlebars");
 const cors = require("cors");
-
 const path = require("path");
+const { engine } = require("express-handlebars");
+
 const app = express();
 const port = process.env.PORT || 3000;
 
+// STATIC FILES
 app.use("/img", express.static(path.join(__dirname, "public/img")));
 
-//HTTP logger
+app.use(express.static(path.join(__dirname, "public")));
+// HTTP logger
 app.use(morgan("combined"));
 
-//template engine
-app.engine("handlebars", handlebars.engine());
-app.set("view engine", "handlebars");
-app.set("views", "./src/resources/view");
+// TEMPLATE ENGINE
+app.engine(
+  "hbs",
+  engine({
+    extname: ".hbs",
+  }),
+);
+app.set("view engine", "hbs");
+app.set("views", path.join(__dirname, "resources/view"));
+
+// ROUTE
 app.get("/", (req, res) => {
+  res.render("home");
+});
+
+app.get("/news", (req, res) => {
   res.render("news");
 });
+
 app.use(cors());
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
