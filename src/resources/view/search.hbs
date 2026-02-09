@@ -1,0 +1,36 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1>Search Results</h1>
+            
+            <form class="mb-4" method="GET" action="/search">
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        placeholder="Search..." 
+                        name="q"
+                        value="{{query}}"
+                    />
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </form>
+
+            {{#if results}}
+                <div class="results-list">
+                    {{#each results}}
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">{{this.title}}</h5>
+                                <p class="card-text">{{this.description}}</p>
+                                <a href="/news/{{this.id}}" class="btn btn-sm btn-info">View More</a>
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{else}}
+                <p class="alert alert-info">No results found.</p>
+            {{/if}}
+        </div>
+    </div>
+</div>
