@@ -61,4 +61,60 @@ app.post("/users", (req, res) => {
 - Thực tế thường dùng cả hai để hỗ trợ đầy đủ, tùy front‑end gửi dữ liệu kiểu nào.
 
 
+
+
+# Ghi chú về mô hình MVC và N-layer
+
+## Mô hình MVC (Model – View – Controller)
+- **Model**: quản lý dữ liệu và logic nghiệp vụ cơ bản (ORM, thao tác DB, validation).
+- **Controller**: nhận request từ client, gọi Model/Service, điều hướng luồng xử lý, trả dữ liệu cho View.
+- **View**: hiển thị dữ liệu cho người dùng.
+  - Nếu backend dùng template engine (EJS, Handlebars…), View nằm trong backend.
+  - Nếu frontend tách riêng (React, Angular, Vue…), thì View do frontend đảm nhận. Backend chỉ lo Model + Controller và trả JSON cho frontend.
+
+### Flow MVC
+1. Client gửi request.
+2. Controller nhận request, gọi Model xử lý dữ liệu.
+3. Controller kết hợp dữ liệu từ Model để gắn vào View (hoặc trả JSON cho frontend).
+4. Response gửi về client qua web server.
+
+---
+
+## Mô hình 3-layer architecture
+Phân tầng tổng thể hệ thống:
+1. **Presentation layer**: giao diện người dùng (frontend: React, Angular, mobile app).
+2. **Business logic layer**: backend xử lý nghiệp vụ (controllers, services).
+3. **Data layer**: database, models.
+
+### Ví dụ
+- Người dùng nhập form đăng ký trên React app (Presentation).
+- Request gửi tới Express server, Controller gọi Service để kiểm tra logic (Business).
+- Service gọi Model/Repository để lưu vào MySQL (Data).
+
+---
+
+## Mô hình N-layer architecture
+Mở rộng từ 3-layer, backend được tách thành nhiều tầng nhỏ chuyên biệt:
+- **Controller layer**: nhận request, điều hướng.
+- **Service/Business layer**: xử lý logic nghiệp vụ.
+- **DAO/Repository layer**: chuyên giao tiếp với database.
+- **DTO layer**: định nghĩa dữ liệu truyền giữa các tầng.
+- Có thể thêm các tầng khác: API Gateway, Caching, Security, Integration…
+
+### Ví dụ hệ thống thương mại điện tử
+- Frontend: web/mobile app hiển thị UI.
+- Backend: nhiều microservice (giỏ hàng, thanh toán, vận chuyển).
+- Mỗi service có Controller – Service – DAO riêng.
+- Database riêng cho từng service.
+- Redis làm caching layer để tăng tốc.
+- API Gateway quản lý request từ nhiều client.
+
+---
+
+## Tóm lại
+- **MVC**: cách tổ chức code trong một ứng dụng backend (Model, View, Controller). Nếu frontend riêng thì View nằm ngoài backend.
+- **3-layer**: kiến trúc tổng thể hệ thống (Presentation – Business – Data).
+- **N-layer**: mở rộng 3-layer, backend tách thành nhiều tầng chuyên biệt để dễ mở rộng và bảo trì.
+
+
 ```
