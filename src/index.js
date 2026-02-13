@@ -7,6 +7,7 @@ const { engine } = require("express-handlebars");
 const app = express();
 const port = process.env.PORT || 3000;
 
+const route = require("./routes");
 // STATIC FILES
 app.use("/img", express.static(path.join(__dirname, "public/img")));
 
@@ -26,17 +27,8 @@ app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "resources/view"));
 
 // ROUTE
-app.get("/", (req, res) => {
-  res.render("home");
-});
+route(app);
 
-app.get("/news", (req, res) => {
-  res.render("news");
-});
-
-app.get("/search", (req, res) => {
-  res.render("search");
-});
 app.use(cors());
 
 app.listen(port, () => {
