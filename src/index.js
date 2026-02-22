@@ -8,6 +8,10 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const route = require("./routes");
+const db = require("./config/db");
+console.log("Before connect");
+db.connectToDatabase();
+console.log("After connect");
 // STATIC FILES
 app.use("/img", express.static(path.join(__dirname, "public/img")));
 

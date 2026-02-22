@@ -1,5 +1,17 @@
-<h1 class="text-danger">Bootstrap OK</h1>
-
-<button class="btn btn-primary">
-  Click me
-</button>
+<div class="mt-4">
+  <div class="row">
+    {{#each courses}}
+    <div class="col-sm-6 col-lg-4">
+      <div class="card">
+        <a href="/courses/{{this.slug}}" class="img-course-anime"></a>
+        <img src="{{this.image}}" alt="Card image cap" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">{{this.name}}</h5>
+          <p class="card-text">{{this.description}}</p>
+          <a href="/courses/{{this.slug}}" class="btn btn-primary">Xem Anime</a>
+        </div>
+      </div>
+    </div>  
+    {{/each}}
+  </div>
+</div>
