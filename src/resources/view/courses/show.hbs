@@ -1,13 +1,24 @@
 <div class="container course-container">
   <div class="row course-row">
     <div class="col-lg-3 course-sidebar">
-      <img src="{{course.image}}" alt="{{course.name}}" class="img-fluid mb-3 course-image">
+      <img
+        src="{{course.image}}"
+        alt="{{course.name}}"
+        class="img-fluid mb-3 course-image"
+      />
       <button class="btn btn-danger w-100 course-btn">XEM NGAY</button>
     </div>
     <div class="col-lg-9 course-content">
       <h2 class="course-title">{{course.name}}</h2>
       <p class="course-description">{{course.description}}</p>
-      <iframe class="course-video" src="{{course.videoUrl}}" frameborder="0" allowfullscreen></iframe>
+      <iframe
+        class="course-video"
+        src="https://www.youtube.com/embed/{{course.videoId}}"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      >
+      </iframe>
     </div>
   </div>
 </div>
