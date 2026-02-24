@@ -50,6 +50,28 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* giúp nút button luôn nằm dưới */
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;   /* số dòng tối thiểu muốn hiển thị */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 3rem;        /* đảm bảo chiếm chỗ cho 2 dòng */
+  margin-bottom: 1rem;
+}
+
 /* Ẩn thanh cuộn ngang toàn trang */
 body {
   overflow-x: hidden;
