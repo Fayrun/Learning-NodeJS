@@ -12,6 +12,9 @@ class CourseController {
       res.status(500).json({ error: error.message });
     }
   }
+  async create(req, res) {
+    res.render("courses/create");
+  }
 }
 
 module.exports = new CourseController();
