@@ -30,6 +30,13 @@ app.engine(
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "resources/view"));
 
+// BODY PARSER
+app.use(
+  express.urlencoded({
+    extended: true,
+  }),
+);
+app.use(express.json());
 // ROUTE
 route(app);
 

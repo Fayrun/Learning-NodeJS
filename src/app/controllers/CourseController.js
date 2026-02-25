@@ -1,4 +1,15 @@
 const Course = require("../models/Courses");
+
+function generateSlug(name) {
+  return name
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+}
 class CourseController {
   // [GET] /courses/:slug
   async show(req, res) {
@@ -17,13 +28,14 @@ class CourseController {
     res.render("courses/create");
   }
   //[POST] /courses
-  async store(req, res, next) {
+  async store(req, res) {
     try {
-      const course = new Course(req.body);
+      const slug = generateSlug(req.body.name);
+      const course = new Course({ ...req.body, slug });
       await course.save();
-      res.redirect("/me/stored/courses");
+      res.json({ message: "Success" });
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      res.status(400).json({ error: error.message });
     }
   }
 }

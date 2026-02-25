@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <h1 class="mb-4">Thêm mới Anime</h1>
-      <form method="POST" action="/courses">
+
+      <form id="create-form">
         <div class="mb-3">
           <label for="name" class="form-label">Tên Anime</label>
           <input
@@ -27,43 +28,41 @@
 
         <div class="mb-3">
           <label for="image" class="form-label">Image URL</label>
-          <input
-            type="text"
-            class="form-control"
-            id="image"
-            name="image"
-            required
-          />
+          <input type="text" class="form-control" id="image" name="image" />
         </div>
 
         <div class="mb-3">
-          <label for="videoUrl" class="form-label">Video ID </label>
-          <input
-            type="text"
-            class="form-control"
-            id="videoUrl"
-            name="videoUrl"
-            required
-          />
+          <label for="videoId" class="form-label">Video ID</label>
+          <input type="text" class="form-control" id="videoId" name="videoId" />
         </div>
 
         <div class="mb-3">
-          <label for="slug" class="form-label">Slug</label>
-          <input
-            type="text"
-            class="form-control"
-            id="slug"
-            name="slug"
-            required
-          />
+          <label for="Genre" class="form-label">Thể loại</label>
+          <select class="form-select" id="Genre" name="Genre" required>
+            <option value="" disabled selected>-- Chọn thể loại --</option>
+            <option value="Action">Action</option>
+            <option value="Shounen">Shounen</option>
+            <option value="Romance">Romance</option>
+            <option value="Mecha">Mecha</option>
+            <option value="Isekai">Isekai</option>
+            <option value="Harem">Harem</option>
+            <option value="Adventure">Adventure</option>
+            <option value="School">School</option>
+            <option value="Slice of life">Slice of life</option>
+            <option value="Horror">Horror</option>
+          </select>
         </div>
 
         <div class="d-grid gap-2">
-          <button type="submit" class="btn btn-primary">Create Course</button>
+          <button type="submit" id="submit-btn" class="btn btn-primary">Create
+            Anime</button>
           <a href="/courses" class="btn btn-secondary">Cancel</a>
         </div>
-      </form>
 
+        <div id="toast" class="alert d-none mt-3" role="alert"></div>
+      </form>
     </div>
   </div>
 </div>
+
+<script src="/js/create_courses.js"></script>

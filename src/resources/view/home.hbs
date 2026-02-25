@@ -1,18 +1,22 @@
 <div class="container mt-4">
   <div class="row">
     {{#each courses}}
-    <div class="col-sm-6 col-lg-4 d-flex">
-      <div class="card flex-fill">
-        <a href="/courses/{{this.slug}}" class="img-course-anime">
-          <img src="{{this.image}}" alt="Card image cap" class="card-img-top">
-        </a>
-        <div class="card-body">
-          <h5 class="card-title">{{this.name}}</h5>
-          <p class="card-text text-truncate">{{this.description}}</p>
-          <a href="/courses/{{this.slug}}" class="btn btn-primary">Xem Anime</a>
+      <div class="col-sm-6 col-lg-4 d-flex mb-5">
+        <div class="card flex-fill">
+          <a href="/courses/{{this.slug}}" class="img-course-anime">
+            <img
+              src="{{this.image}}"
+              alt="Card image cap"
+              class="card-img-top"
+            />
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">{{this.name}}</h5>
+            <p class="card-text text-truncate">{{this.description}}</p>
+            <a href="/courses/{{this.slug}}" class="btn btn-primary">Xem Anime</a>
+          </div>
         </div>
       </div>
-    </div>  
     {{/each}}
   </div>
 </div>
