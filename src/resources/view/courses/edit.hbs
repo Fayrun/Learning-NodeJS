@@ -1,9 +1,11 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-8 offset-md-2">
-      <h1 class="mb-4">Thêm mới Anime</h1>
+      <h1 class="mb-4">Chỉnh sửa Anime</h1>
 
-      <form id="create-form">
+      <form id="edit-form">
+        <input type="hidden" id="courseId" value="{{course._id}}" />
+
         <div class="mb-3">
           <label for="name" class="form-label">Tên Anime</label>
           <input
@@ -11,6 +13,7 @@
             class="form-control"
             id="name"
             name="name"
+            value="{{course.name}}"
             required
           />
         </div>
@@ -23,17 +26,29 @@
             name="description"
             rows="4"
             required
-          ></textarea>
+          >{{course.description}}</textarea>
         </div>
 
         <div class="mb-3">
           <label for="image" class="form-label">Image URL</label>
-          <input type="text" class="form-control" id="image" name="image" />
+          <input
+            type="text"
+            class="form-control"
+            id="image"
+            name="image"
+            value="{{course.image}}"
+          />
         </div>
 
         <div class="mb-3">
           <label for="videoId" class="form-label">Video ID</label>
-          <input type="text" class="form-control" id="videoId" name="videoId" />
+          <input
+            type="text"
+            class="form-control"
+            id="videoId"
+            name="videoId"
+            value="{{course.videoId}}"
+          />
         </div>
         <div class="mb-3">
           <label for="numberOfEpisodes" class="form-label">Số tập</label>
@@ -43,7 +58,7 @@
             id="numberOfEpisodes"
             name="numberOfEpisodes"
             min="1"
-            placeholder="Nhập số tập..."
+            value="{{course.numberOfEpisodes}}"
             required
           />
         </div>
@@ -192,11 +207,11 @@
             name="releaseYear"
             required
           >
-            <option value="" disabled selected>-- Chọn năm --</option>
+            <option value="" disabled>-- Chọn năm --</option>
           </select>
         </div>
         <div class="d-grid gap-2">
-          <button type="submit" id="submit-btn" class="btn btn-primary">Create
+          <button type="submit" id="submit-btn" class="btn btn-primary">Cập nhật
             Anime</button>
           <a href="/courses" class="btn btn-secondary">Cancel</a>
         </div>
@@ -206,10 +221,15 @@
     </div>
   </div>
 </div>
+
 <script>
-  var yearSelect = document.getElementById("releaseYear"); var currentYear = new
+  var currentGenres =
+  {{{json course.Genre}}}; var savedYear =
+  {{course.releaseYear}}; var yearSelect =
+  document.getElementById("releaseYear"); var currentYear = new
   Date().getFullYear(); for (var y = currentYear; y >= 1995; y--) { var opt =
-  document.createElement("option"); opt.value = y; opt.textContent = y;
-  yearSelect.appendChild(opt); }
+  document.createElement("option"); opt.value = y; opt.textContent = y; if (y
+  === savedYear) opt.selected = true; yearSelect.appendChild(opt); }
 </script>
-<script src="/js/create_courses.js"></script>
+
+<script src="/js/edit_courses.js"></script>

@@ -25,6 +25,9 @@ app.engine(
   "hbs",
   engine({
     extname: ".hbs",
+    helpers: {
+      json: (context) => JSON.stringify(context),
+    },
   }),
 );
 app.set("view engine", "hbs");

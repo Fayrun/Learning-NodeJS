@@ -8,8 +8,13 @@ const courseSchema = new Schema(
     image: { type: String, required: true },
     videoId: { type: String, required: true, maxlength: 20 },
     slug: { type: String, unique: true },
+    numberOfEpisodes: {
+      type: Number,
+      required: true,
+      min: 1,
+    },
     Genre: {
-      type: String,
+      type: [String],
       required: true,
       enum: [
         "Action",
@@ -23,6 +28,12 @@ const courseSchema = new Schema(
         "Slice of life",
         "Horror",
       ],
+    },
+    releaseYear: {
+      type: Number,
+      required: true,
+      min: 1900,
+      max: new Date().getFullYear(),
     },
   },
   { timestamps: true },

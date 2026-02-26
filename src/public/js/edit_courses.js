@@ -1,11 +1,19 @@
-var form = document.getElementById("create-form");
+var form = document.getElementById("edit-form");
 var submitBtn = document.getElementById("submit-btn");
 var toast = document.getElementById("toast");
+
+// Pre-check các genre đã có sẵn
+if (currentGenres && currentGenres.length > 0) {
+  document.querySelectorAll(".genre-check").forEach(function (checkbox) {
+    if (currentGenres.indexOf(checkbox.value) !== -1) {
+      checkbox.checked = true;
+    }
+  });
+}
 
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
 
-  // Phải nằm TRONG này để đọc đúng lúc user submit
   var checked = document.querySelectorAll(".genre-check:checked");
   var Genre = Array.from(checked).map(function (el) {
     return el.value;
@@ -16,8 +24,10 @@ form.addEventListener("submit", async function (e) {
     toast.textContent = "Vui long chon it nhat 1 the loai!";
     toast.classList.remove("d-none");
     toast.scrollIntoView({ behavior: "smooth" });
-    return; // return ở đây mới đúng, chặn submit khi chưa chọn genre
+    return;
   }
+
+  var courseId = document.getElementById("courseId").value;
 
   var formData = {
     name: document.getElementById("name").value.trim(),
@@ -32,11 +42,11 @@ form.addEventListener("submit", async function (e) {
   };
 
   submitBtn.disabled = true;
-  submitBtn.textContent = "Dang tao...";
+  submitBtn.textContent = "Dang cap nhat...";
 
   try {
-    var response = await fetch("/courses/store", {
-      method: "POST",
+    var response = await fetch("/courses/" + courseId + "/update", {
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     });
@@ -45,10 +55,9 @@ form.addEventListener("submit", async function (e) {
 
     if (response.ok) {
       toast.className = "alert alert-success";
-      toast.textContent = "Tao anime thanh cong!";
+      toast.textContent = "Cap nhat thanh cong!";
       toast.classList.remove("d-none");
       toast.scrollIntoView({ behavior: "smooth" });
-      form.reset();
     } else {
       toast.className = "alert alert-danger";
       toast.textContent = "Loi: " + result.error;
@@ -62,6 +71,6 @@ form.addEventListener("submit", async function (e) {
     console.error(err);
   } finally {
     submitBtn.disabled = false;
-    submitBtn.textContent = "Create Anime";
+    submitBtn.textContent = "Cap nhat Anime";
   }
 });
