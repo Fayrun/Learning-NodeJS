@@ -14,7 +14,21 @@ class CourseController {
   // [GET] /courses
   async index(req, res) {
     try {
-      const courses = await Course.find({});
+      var filter = {};
+
+      if (req.query.year) {
+        if (req.query.year === "before2018") {
+          filter.releaseYear = { $lt: 2018 };
+        } else {
+          filter.releaseYear = parseInt(req.query.year);
+        }
+      }
+
+      if (req.query.genre) {
+        filter.Genre = req.query.genre;
+      }
+
+      const courses = await Course.find(filter);
       res.render("courses/index", {
         courses: courses.map((c) => c.toObject()),
       });

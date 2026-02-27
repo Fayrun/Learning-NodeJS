@@ -1,10 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-animet">
   <div class="container-fluid px-4">
 
-    <!-- Logo -->
     <a class="navbar-brand animet-logo" href="/">AnimeHay</a>
 
-    <!-- Mobile toggle -->
     <button
       class="navbar-toggler"
       type="button"
@@ -18,7 +16,6 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarMain">
-      <!-- Nav links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-lg-center">
 
         <li class="nav-item">
@@ -30,6 +27,8 @@
         <li class="nav-item">
           <a class="nav-link animet-link" href="/courses">DANH SÁCH ANIME</a>
         </li>
+
+        <!-- NĂM PHÁT HÀNH - generate bằng JS -->
         <li class="nav-item dropdown">
           <a
             class="nav-link animet-link dropdown-toggle"
@@ -40,14 +39,12 @@
           >
             NĂM PHÁT HÀNH
           </a>
-          <ul class="dropdown-menu animet-dropdown">
-            <li><a class="dropdown-item" href="#">Năm 2025</a></li>
-            <li><a class="dropdown-item" href="#">Năm 2024</a></li>
-            <li><a class="dropdown-item" href="#">Năm 2023</a></li>
-            <li><a class="dropdown-item" href="#">Trước 2023</a></li>
+          <ul class="dropdown-menu animet-dropdown" id="year-dropdown">
+            <!-- JS sẽ fill vào đây -->
           </ul>
         </li>
 
+        <!-- THỂ LOẠI - đọc từ server -->
         <li class="nav-item dropdown">
           <a
             class="nav-link animet-link dropdown-toggle"
@@ -59,15 +56,17 @@
             THỂ LOẠI
           </a>
           <ul class="dropdown-menu animet-dropdown">
-            <li><a class="dropdown-item" href="#">Isekai</a></li>
-            <li><a class="dropdown-item" href="#">Slice of Life</a></li>
-            <li><a class="dropdown-item" href="#">Hành động</a></li>
+            {{#each genres}}
+              <li><a
+                  class="dropdown-item"
+                  href="/courses?genre={{this}}"
+                >{{this}}</a></li>
+            {{/each}}
           </ul>
         </li>
 
       </ul>
 
-      <!-- Search -->
       <form class="d-flex animet-search" role="search">
         <span class="search-icon">&#128269;</span>
         <input
@@ -79,3 +78,5 @@
     </div>
   </div>
 </nav>
+
+<script src="/js/header.js"></script>

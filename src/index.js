@@ -27,6 +27,7 @@ app.engine(
     extname: ".hbs",
     helpers: {
       json: (context) => JSON.stringify(context),
+      eq: (a, b) => a === b, // ← thêm dòng này
     },
   }),
 );

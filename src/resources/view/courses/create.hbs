@@ -1,11 +1,11 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-8 offset-md-2">
-      <h1 class="mb-4">Thêm mới Anime</h1>
+      <h1 class="mb-4 anime-text-title">Thêm mới Anime</h1>
 
       <form id="create-form">
         <div class="mb-3">
-          <label for="name" class="form-label">Tên Anime</label>
+          <label for="name" class="form-label anime-text">Tên Anime</label>
           <input
             type="text"
             class="form-control"
@@ -16,7 +16,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="description" class="form-label">Mô tả</label>
+          <label for="description" class="form-label anime-text">Mô tả</label>
           <textarea
             class="form-control"
             id="description"
@@ -27,31 +27,88 @@
         </div>
 
         <div class="mb-3">
-          <label for="image" class="form-label">Image URL</label>
+          <label for="image" class="form-label anime-text">Image URL</label>
           <input type="text" class="form-control" id="image" name="image" />
         </div>
 
         <div class="mb-3">
-          <label for="videoId" class="form-label">Video ID</label>
+          <label for="videoId" class="form-label anime-text">Video ID</label>
           <input type="text" class="form-control" id="videoId" name="videoId" />
         </div>
+
         <div class="mb-3">
-          <label for="numberOfEpisodes" class="form-label">Số tập</label>
+          <label for="numberOfEpisodes" class="form-label anime-text">Số tập</label>
           <input
             type="number"
             class="form-control"
             id="numberOfEpisodes"
             name="numberOfEpisodes"
             min="1"
-            placeholder="Nhập số tập..."
+            placeholder="Nhap so tap..."
             required
           />
         </div>
+
         <div class="mb-3">
-          <label class="form-label">Thể loại</label>
+          <label for="duration" class="form-label anime-text">Thời lượng
+            (phút/tập)</label>
+          <input
+            type="number"
+            class="form-control"
+            id="duration"
+            name="duration"
+            min="1"
+            placeholder="VD: 24"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="status" class="form-label anime-text">Trạng thái</label>
+          <select class="form-select" id="status" name="status" required>
+            <option value="" disabled selected>-- Chon trang thai --</option>
+            <option value="Đang chiếu">Đang chiếu</option>
+            <option value="Hoàn thành">Hoàn thành</option>
+            <option value="Sắp chiếu">Sắp chiếu</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="country" class="form-label anime-text">Quốc gia</label>
+          <input
+            type="text"
+            class="form-control"
+            id="country"
+            name="country"
+            placeholder="VD: Nhat Ban"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="studio" class="form-label anime-text">Nhà sản xuất</label>
+          <input
+            type="text"
+            class="form-control"
+            id="studio"
+            name="studio"
+            placeholder="VD: Mappa, Bones..."
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="warning" class="form-label anime-text">Chú ý</label>
+          <select class="form-select" id="warning" name="warning" required>
+            <option value="None" selected>None</option>
+            <option value="R18+">R18+ - Can nhac truoc khi xem</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label anime-text">Thể loại</label>
           <div class="row row-cols-2 g-2 border rounded p-3">
-            <div class="col">
-              <div class="form-check">
+            <div class="col"><div class="form-check">
                 <input
                   class="form-check-input genre-check"
                   type="checkbox"
@@ -59,13 +116,11 @@
                   id="genre-action"
                 />
                 <label
-                  class="form-check-label"
+                  class="form-check-label anime-text"
                   for="genre-action"
                 >Action</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-check">
+              </div></div>
+            <div class="col"><div class="form-check">
                 <input
                   class="form-check-input genre-check"
                   type="checkbox"
@@ -73,13 +128,11 @@
                   id="genre-shounen"
                 />
                 <label
-                  class="form-check-label"
+                  class="form-check-label anime-text"
                   for="genre-shounen"
                 >Shounen</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-check">
+              </div></div>
+            <div class="col"><div class="form-check">
                 <input
                   class="form-check-input genre-check"
                   type="checkbox"
@@ -87,24 +140,23 @@
                   id="genre-romance"
                 />
                 <label
-                  class="form-check-label"
+                  class="form-check-label anime-text"
                   for="genre-romance"
                 >Romance</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-check">
+              </div></div>
+            <div class="col"><div class="form-check">
                 <input
                   class="form-check-input genre-check"
                   type="checkbox"
                   value="Mecha"
                   id="genre-mecha"
                 />
-                <label class="form-check-label" for="genre-mecha">Mecha</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-check">
+                <label
+                  class="form-check-label anime-text"
+                  for="genre-mecha"
+                >Mecha</label>
+              </div></div>
+            <div class="col"><div class="form-check">
                 <input
                   class="form-check-input genre-check"
                   type="checkbox"
@@ -112,24 +164,23 @@
                   id="genre-isekai"
                 />
                 <label
-                  class="form-check-label"
+                  class="form-check-label anime-text"
                   for="genre-isekai"
                 >Isekai</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-check">
+              </div></div>
+            <div class="col"><div class="form-check">
                 <input
                   class="form-check-input genre-check"
                   type="checkbox"
                   value="Harem"
                   id="genre-harem"
                 />
-                <label class="form-check-label" for="genre-harem">Harem</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-check">
+                <label
+                  class="form-check-label anime-text"
+                  for="genre-harem"
+                >Harem</label>
+              </div></div>
+            <div class="col"><div class="form-check">
                 <input
                   class="form-check-input genre-check"
                   type="checkbox"
@@ -137,13 +188,11 @@
                   id="genre-adventure"
                 />
                 <label
-                  class="form-check-label"
+                  class="form-check-label anime-text"
                   for="genre-adventure"
                 >Adventure</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-check">
+              </div></div>
+            <div class="col"><div class="form-check">
                 <input
                   class="form-check-input genre-check"
                   type="checkbox"
@@ -151,24 +200,21 @@
                   id="genre-school"
                 />
                 <label
-                  class="form-check-label"
+                  class="form-check-label anime-text"
                   for="genre-school"
                 >School</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-check">
+              </div></div>
+            <div class="col"><div class="form-check">
                 <input
                   class="form-check-input genre-check"
                   type="checkbox"
                   value="Slice of life"
                   id="genre-sol"
                 />
-                <label class="form-check-label" for="genre-sol">Slice of life</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-check">
+                <label class="form-check-label anime-text" for="genre-sol">Slice
+                  of life</label>
+              </div></div>
+            <div class="col"><div class="form-check">
                 <input
                   class="form-check-input genre-check"
                   type="checkbox"
@@ -176,25 +222,27 @@
                   id="genre-horror"
                 />
                 <label
-                  class="form-check-label"
+                  class="form-check-label anime-text"
                   for="genre-horror"
                 >Horror</label>
-              </div>
-            </div>
+              </div></div>
           </div>
-          <small class="text-muted">Chọn một hoặc nhiều thể loại</small>
+          <small class="text-muted">Chon mot hoac nhieu the loai</small>
         </div>
+
         <div class="mb-3">
-          <label for="releaseYear" class="form-label">Năm phát hành</label>
+          <label for="releaseYear" class="form-label anime-text">Năm phát hành</label>
           <select
             class="form-select"
             id="releaseYear"
             name="releaseYear"
             required
+            data-saved="0"
           >
-            <option value="" disabled selected>-- Chọn năm --</option>
+            <option value="" disabled selected>-- Chon nam --</option>
           </select>
         </div>
+
         <div class="d-grid gap-2">
           <button type="submit" id="submit-btn" class="btn btn-primary">Create
             Anime</button>
@@ -206,10 +254,6 @@
     </div>
   </div>
 </div>
-<script>
-  var yearSelect = document.getElementById("releaseYear"); var currentYear = new
-  Date().getFullYear(); for (var y = currentYear; y >= 1995; y--) { var opt =
-  document.createElement("option"); opt.value = y; opt.textContent = y;
-  yearSelect.appendChild(opt); }
-</script>
+
+<script src="/js/year-selected.js"></script>
 <script src="/js/create_courses.js"></script>

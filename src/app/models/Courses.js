@@ -4,15 +4,11 @@ const Schema = mongoose.Schema;
 const courseSchema = new Schema(
   {
     name: { type: String, required: true, maxlength: 255 },
-    description: { type: String, required: true, maxlength: 600 },
+    description: { type: String, required: true },
     image: { type: String, required: true },
     videoId: { type: String, required: true, maxlength: 20 },
     slug: { type: String, unique: true },
-    numberOfEpisodes: {
-      type: Number,
-      required: true,
-      min: 1,
-    },
+    numberOfEpisodes: { type: Number, required: true, min: 1 },
     Genre: {
       type: [String],
       required: true,
@@ -34,6 +30,22 @@ const courseSchema = new Schema(
       required: true,
       min: 1900,
       max: new Date().getFullYear(),
+    },
+
+    // ← THÊM MỚI
+    status: {
+      type: String,
+      required: true,
+      enum: ["Đang chiếu", "Hoàn thành", "Sắp chiếu"],
+      default: "Đang chiếu",
+    },
+    country: { type: String, required: true, maxlength: 100 },
+    studio: { type: String, required: true, maxlength: 255 },
+    duration: { type: Number, required: true, min: 1 }, // phút/tập
+    warning: {
+      type: String,
+      enum: ["None", "R18+"],
+      default: "None",
     },
   },
   { timestamps: true },

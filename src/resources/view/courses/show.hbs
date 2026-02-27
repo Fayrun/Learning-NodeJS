@@ -1,24 +1,88 @@
-<div class="container course-container">
-  <div class="row course-row">
-    <div class="col-lg-3 course-sidebar">
-      <img
-        src="{{course.image}}"
-        alt="{{course.name}}"
-        class="img-fluid mb-3 course-image"
-      />
-      <button class="btn btn-danger w-100 course-btn">XEM NGAY</button>
+<div class="show-hero">
+  <div class="container-fluid px-4">
+    <div class="show-hero-inner">
+
+      <div class="show-poster">
+        <img src="{{course.image}}" alt="{{course.name}}" />
+        <a href="#course-video" class="show-watch-btn">XEM PHIM</a>
+      </div>
+
+      <div class="show-info">
+        <h1 class="show-title">{{course.name}}</h1>
+        <p class="show-desc">{{course.description}}</p>
+
+        <div class="show-video-inline" id="course-video">
+          <iframe
+            src="https://www.youtube.com/embed/{{course.videoId}}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <div class="show-rating-bar">
+  <div class="show-rating-left">
+    <div class="show-score">86%</div>
+    <div class="show-stars">
+      <span class="stars">★★★★★★★★★☆</span>
+      <small>(72 luot, danh gia: 8.6 tren 10)</small>
     </div>
-    <div class="col-lg-9 course-content">
-      <h2 class="course-title">{{course.name}}</h2>
-      <p class="course-description">{{course.description}}</p>
-      <iframe
-        class="course-video"
-        src="https://www.youtube.com/embed/{{course.videoId}}"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      >
-      </iframe>
+  </div>
+  <div class="show-meta">
+    <span><i class="bi bi-clock"></i> {{course.duration}} Phut</span>
+    <span><i class="bi bi-calendar"></i> {{course.releaseYear}}</span>
+    <span><i class="bi bi-eye"></i> 93,280 luot xem</span>
+  </div>
+</div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid px-4 mt-4">
+  <div class="show-section-title">
+    <i class="bi bi-file-text"></i> Thong tin phim
+  </div>
+  <div class="show-detail-grid">
+    <div class="show-detail-item">
+      <span class="show-detail-label"><i class="bi bi-circle-fill"></i> Trang thai:</span>
+      <span class="show-detail-value">{{course.numberOfEpisodes}}/{{course.numberOfEpisodes}} Tap - {{course.status}}</span>
+    </div>
+    <div class="show-detail-item">
+      <span class="show-detail-label"><i class="bi bi-circle-fill"></i> Thoi luong:</span>
+      <span class="show-detail-value">{{course.duration}} Phut</span>
+    </div>
+    <div class="show-detail-item">
+      <span class="show-detail-label"><i class="bi bi-circle-fill"></i> The loai:</span>
+      <span class="show-detail-value show-genres">
+        {{#each course.Genre}}
+          <a href="/courses?genre={{this}}">{{this}}</a>{{#unless @last}}, {{/unless}}
+        {{/each}}
+      </span>
+    </div>
+    <div class="show-detail-item">
+      <span class="show-detail-label"><i class="bi bi-circle-fill"></i> Do phan giai:</span>
+      <span class="show-detail-value">HD</span>
+    </div>
+    <div class="show-detail-item">
+      <span class="show-detail-label"><i class="bi bi-circle-fill"></i> Quoc gia:</span>
+      <span class="show-detail-value">{{course.country}}</span>
+    </div>
+    <div class="show-detail-item">
+      <span class="show-detail-label"><i class="bi bi-circle-fill"></i> Chu y:</span>
+      <span class="show-detail-value {{#if (eq course.warning "R18+")}}show-warning-badge{{else}}show-none-badge{{/if}}">
+        {{course.warning}}
+      </span>
+    </div>
+    <div class="show-detail-item">
+      <span class="show-detail-label"><i class="bi bi-circle-fill"></i> Nha san xuat:</span>
+      <span class="show-detail-value">{{course.studio}}</span>
+    </div>
+    <div class="show-detail-item">
+      <span class="show-detail-label"><i class="bi bi-circle-fill"></i> Tap moi:</span>
+      <span class="show-detail-value">{{course.numberOfEpisodes}}</span>
     </div>
   </div>
 </div>

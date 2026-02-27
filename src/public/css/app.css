@@ -1,3 +1,8 @@
+body {
+  overflow-x: hidden;
+  background-color: rgb(10, 63, 89);
+}
+
 .course-container {
   max-width: 1200px;
   margin: 2rem auto;
@@ -9,7 +14,24 @@
   align-items: flex-start;
   gap: 2rem;
 }
-
+.anime-text-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #e8000d;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-family: 'Arial Black', 'Impact', sans-serif;
+  text-shadow:
+    3px 3px 0 #7a0000,
+    -2px -2px 0 #ff6666;
+  line-height: 1.2;
+}
+.anime-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 1rem;
+}
 .course-sidebar {
   text-align: center;
 }
@@ -38,7 +60,7 @@
 .course-description {
   font-size: 1rem;
   line-height: 1.6;
-  color: #333;
+  color: white;
   margin-bottom: 1.5rem;
 }
 
@@ -373,11 +395,225 @@
   }
 }
 
-body {
-  overflow-x: hidden;
-  background-color: rgb(10, 63, 89);
+
+/* ============================================================
+   SHOW PAGE
+   ============================================================ */
+.show-hero {
+  background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 100%);
+  padding: 2rem 0;
+  border-bottom: 2px solid #2a2a2a;
 }
 
+.show-hero-inner {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.show-poster {
+  position: relative;
+  flex-shrink: 0;
+  width: 220px;
+}
+
+.show-poster img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+.show-watch-btn {
+  display: block;
+  text-align: center;
+  margin-top: 0.75rem;
+  background: #e8000d;
+  color: #fff;
+  font-weight: 700;
+  padding: 0.6rem;
+  border-radius: 6px;
+  text-decoration: none;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.show-watch-btn:hover {
+  background: #c0000a;
+  color: #fff;
+}
+
+.show-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.show-title {
+  color: #f0c040;
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.show-desc {
+  color: #ccc;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+/* Video inline trong hero */
+.show-video-inline {
+  position: relative;
+  justify-content: center;
+  width: 50%;          /* ← giới hạn chiều rộng */
+  padding-bottom: 20%; /* ← 70% * 56.25% = ~39% để giữ tỉ lệ 16:9 */
+  height: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+  margin-bottom: 1.25rem;
+}
+.show-video-inline iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.show-rating-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.show-rating-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.show-score {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid #f0c040;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #f0c040;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.show-stars .stars {
+  color: #f0c040;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  display: block;
+}
+
+.show-stars small {
+  color: #888;
+  font-size: 0.75rem;
+}
+
+.show-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+.show-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  white-space: nowrap;
+}
+
+/* Detail section */
+.show-section-title {
+  color: #f0c040;
+  font-weight: 700;
+  font-size: 1rem;
+  border-bottom: 2px solid #f0c040;
+  padding-bottom: 0.4rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.show-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 2rem;
+  background: #1a1a1a;
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.show-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+}
+
+.show-detail-label {
+  color: #aaa;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.show-detail-label i {
+  color: #f0c040;
+  font-size: 0.5rem;
+  vertical-align: middle;
+}
+
+.show-detail-value {
+  color: #eee;
+}
+
+.show-genres a {
+  color: #f0c040;
+  text-decoration: none;
+}
+
+.show-genres a:hover {
+  text-decoration: underline;
+}
+
+.show-warning-badge {
+  background: #e8000d;
+  color: #fff;
+  padding: 1px 8px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.show-none-badge {
+  color: #aaa;
+}
+
+@media (max-width: 768px) {
+  .show-hero-inner {
+    flex-direction: column;
+  }
+  .show-poster {
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  .show-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* ============================================================
    FOOTER - ANIMET Style

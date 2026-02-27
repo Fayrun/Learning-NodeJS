@@ -29,6 +29,11 @@ form.addEventListener("submit", async function (e) {
     ),
     Genre: Genre,
     releaseYear: parseInt(document.getElementById("releaseYear").value),
+    status: document.getElementById("status").value,
+    country: document.getElementById("country").value.trim(),
+    studio: document.getElementById("studio").value.trim(),
+    duration: parseInt(document.getElementById("duration").value),
+    warning: document.getElementById("warning").value,
   };
 
   submitBtn.disabled = true;
