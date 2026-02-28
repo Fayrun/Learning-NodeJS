@@ -1,24 +1,26 @@
-<div class="container-fluid px-4 mt-4">
-  <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
-    {{#each courses}}
-      <div class="col">
-        <a
-          href="/courses/{{this.slug}}"
-          class="text-decoration-none text-white"
-        >
-          <div class="anime-card">
-            <div class="anime-thumb">
-              <img src="{{this.image}}" alt="{{this.name}}" />
-              <div class="anime-badge-ep">TẬP<br /><strong
-                >{{this.numberOfEpisodes}}</strong></div>
-              <div class="anime-year-bar">{{this.releaseYear}}</div>
+<div class="container-middle">
+  <div class="container-fluid px-4 mt-4">
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
+      {{#each courses}}
+        <div class="col">
+          <a
+            href="/courses/{{this.slug}}"
+            class="text-decoration-none text-white"
+          >
+            <div class="anime-card">
+              <div class="anime-thumb">
+                <img src="{{this.image}}" alt="{{this.name}}" />
+                <div class="anime-badge-ep">TẬP<br /><strong
+                  >{{this.numberOfEpisodes}}</strong></div>
+                <div class="anime-year-bar">{{this.releaseYear}}</div>
+              </div>
+              <div class="anime-info">
+                <p class="anime-title">{{this.name}}</p>
+              </div>
             </div>
-            <div class="anime-info">
-              <p class="anime-title">{{this.name}}</p>
-            </div>
-          </div>
-        </a>
-      </div>
-    {{/each}}
+          </a>
+        </div>
+      {{/each}}
+    </div>
   </div>
 </div>

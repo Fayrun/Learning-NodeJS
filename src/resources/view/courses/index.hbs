@@ -1,53 +1,58 @@
-<div class="container mt-5">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="anime-text-title">Danh sách Anime</h1>
-    <a href="/courses/create" class="btn btn-primary">+ Thêm mới</a>
-  </div>
+<div class="container-middle">
+  <div class="container-fluid px-4 mt-4">
 
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-    {{#each courses}}
-      <div class="col">
-        <div class="card h-100">
-          <img
-            src="{{this.image}}"
-            class="card-img-top"
-            alt="{{this.name}}"
-            style="height: 300px; object-fit: cover;"
-          />
-          <div class="card-body">
-            <h5 class="card-title">{{this.name}}</h5>
-            <p class="card-text text-muted" style="font-size: 0.85rem;">
-              {{#each this.Genre}}
-                <span class="badge bg-secondary me-1">{{this}}</span>
-              {{/each}}
-            </p>
-            <p class="card-text">{{this.description}}</p>
-          </div>
-          <div class="card-footer d-flex gap-2">
-            <a
-              href="/courses/{{this.slug}}"
-              class="btn btn-info btn-sm flex-fill"
-            >Xem</a>
-            <a
-              href="/courses/{{this._id}}/edit"
-              class="btn btn-warning btn-sm flex-fill"
-            >Sửa</a>
-            <button
-              class="btn btn-danger btn-sm flex-fill"
-              onclick="deleteCourse('{{this._id}}')"
-            >Xóa</button>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="anime-text-title">Danh sách Anime</h1>
+      <a href="/courses/create" class="btn btn-primary">+ Thêm mới</a>
+    </div>
+
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3">
+      {{#each courses}}
+        <div class="col">
+          <div class="anime-card">
+
+            <div class="anime-thumb">
+              <a href="/courses/{{this.slug}}">
+                <img src="{{this.image}}" alt="{{this.name}}" />
+              </a>
+              <div class="anime-badge-ep">TẬP<br /><strong
+                >{{this.numberOfEpisodes}}</strong></div>
+              <div class="anime-year-bar">{{this.releaseYear}}</div>
+
+              <!-- Icon edit/delete góc trên phải -->
+              <div class="anime-action-btns">
+                <a
+                  href="/courses/{{this._id}}/edit"
+                  class="anime-action-btn edit"
+                  title="Sua"
+                >
+                  <i class="bi bi-pencil-fill"></i>
+                </a>
+                <button
+                  class="anime-action-btn delete"
+                  title="Xoa"
+                  onclick="deleteCourse('{{this._id}}')"
+                >
+                  <i class="bi bi-trash-fill"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="anime-info">
+              <p class="anime-title">{{this.name}}</p>
+              <div class="anime-genres">
+                {{#each this.Genre}}
+                  <span class="anime-genre-badge">{{this}}</span>
+                {{/each}}
+              </div>
+            </div>
+
           </div>
         </div>
-      </div>
-    {{/each}}
+      {{/each}}
+    </div>
+
   </div>
 </div>
 
-<script>
-  function deleteCourse(id) { if (!confirm("Ban co chac muon xoa anime nay?"))
-  return; fetch("/courses/" + id + "/delete", { method: "DELETE" })
-  .then(function(res) { return res.json(); }) .then(function(result) { if
-  (result.message) { alert("Xoa thanh cong!"); window.location.reload(); } else
-  { alert("Loi: " + result.error); } }) .catch(function(err) {
-  console.error(err); }); }
-</script>
+<script src="/js/delete_course.js"></script>
