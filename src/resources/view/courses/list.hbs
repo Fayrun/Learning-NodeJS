@@ -3,6 +3,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h1 class="anime-text-title">Danh sách Anime</h1>
+      <a href="/courses/create" class="btn btn-primary">+ Thêm mới</a>
     </div>
 
     {{#if searchQuery}}
@@ -30,6 +31,22 @@
               <div class="anime-badge-ep">TẬP<br /><strong
                 >{{this.numberOfEpisodes}}</strong></div>
               <div class="anime-year-bar">{{this.releaseYear}}</div>
+              <div class="anime-action-btns">
+                <a
+                  href="/courses/{{this._id}}/edit"
+                  class="anime-action-btn edit"
+                  title="Sua"
+                >
+                  <i class="bi bi-pencil-fill"></i>
+                </a>
+                <button
+                  class="anime-action-btn delete"
+                  title="Xoa"
+                  onclick="deleteCourse('{{this._id}}')"
+                >
+                  <i class="bi bi-trash-fill"></i>
+                </button>
+              </div>
             </div>
             <div class="anime-info">
               <p class="anime-title">{{this.name}}</p>

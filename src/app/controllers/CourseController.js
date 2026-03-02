@@ -36,6 +36,30 @@ class CourseController {
       res.status(500).json({ error: error.message });
     }
   }
+  async list(req, res) {
+    try {
+      var filter = {};
+
+      if (req.query.year) {
+        if (req.query.year === "before2018") {
+          filter.releaseYear = { $lt: 2018 };
+        } else {
+          filter.releaseYear = parseInt(req.query.year);
+        }
+      }
+
+      if (req.query.genre) {
+        filter.Genre = req.query.genre;
+      }
+
+      const courses = await Course.find(filter);
+      res.render("courses/list", {
+        courses: courses.map((c) => c.toObject()),
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
   // [GET] /courses/:slug
   async show(req, res) {
     try {
@@ -88,6 +112,20 @@ class CourseController {
     try {
       await Course.findByIdAndDelete(req.params.id);
       res.json({ message: "Success" });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+  async search(req, res) {
+    try {
+      const q = req.query.q || "";
+      const courses = await Course.find({
+        name: { $regex: q, $options: "i" },
+      });
+      res.render("courses/index", {
+        courses: courses.map((c) => c.toObject()),
+        searchQuery: q,
+      });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
