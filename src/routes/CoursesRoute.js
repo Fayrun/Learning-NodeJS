@@ -9,6 +9,7 @@ router.get("/search", courseController.search);
 router.get("/create", requireLogin, courseController.create); // ← chỉ giữ cái có requireLogin
 router.post("/store", requireLogin, courseController.store);
 router.get("/:id/edit", requireLogin, courseController.edit); // ← chỉ giữ cái có requireLogin
+router.post("/:id/follow", requireLogin, courseController.follow);
 router.put("/:id/update", requireLogin, courseController.update);
 router.delete("/:id/delete", requireLogin, courseController.destroy);
 router.get("/:slug", courseController.show);

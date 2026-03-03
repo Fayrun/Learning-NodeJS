@@ -130,6 +130,25 @@ class CourseController {
       res.status(500).json({ error: error.message });
     }
   }
+  async follow(req, res) {
+    const userId = req.session.user.id;
+    const courseId = req.params.id;
+    const user = await require("../models/User").findById(userId);
+    const isFollowing = user.following
+      .map((id) => id.toString())
+      .includes(courseId);
+
+    if (isFollowing) {
+      await require("../models/User").findByIdAndUpdate(userId, {
+        $pull: { following: courseId },
+      });
+    } else {
+      await require("../models/User").findByIdAndUpdate(userId, {
+        $addToSet: { following: courseId },
+      });
+    }
+    res.json({ following: !isFollowing });
+  }
 }
 
 module.exports = new CourseController();

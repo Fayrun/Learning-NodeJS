@@ -21,20 +21,23 @@
         <li class="nav-item">
           <a class="nav-link animet-link active" href="/">XEM PHIM</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link animet-link" href="/courses/create">THÊM ANIME</a>
-        </li>
+
+        {{#if currentUser}}
+          <li class="nav-item">
+            <a class="nav-link animet-link" href="/courses/create">THÊM ANIME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link animet-link" href="/courses/list">CHỈNH SỬA DANH SÁCH</a>
+          </li>
+        {{/if}}
+
         <li class="nav-item">
           <a class="nav-link animet-link" href="/courses">DANH SÁCH ANIME</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link animet-link" href="/courses/list">CHỈNH SỬA DANH
-            SÁCH</a>
-        </li>
 
-        <!-- NĂM PHÁT HÀNH - generate bằng JS -->
+        <!-- NĂM PHÁT HÀNH -->
         <li class="nav-item dropdown">
-          <a
+          
             class="nav-link animet-link dropdown-toggle"
             href="#"
             role="button"
@@ -43,14 +46,12 @@
           >
             NĂM PHÁT HÀNH
           </a>
-          <ul class="dropdown-menu animet-dropdown" id="year-dropdown">
-            <!-- JS sẽ fill vào đây -->
-          </ul>
+          <ul class="dropdown-menu animet-dropdown" id="year-dropdown"></ul>
         </li>
 
-        <!-- THỂ LOẠI - đọc từ server -->
+        <!-- THỂ LOẠI -->
         <li class="nav-item dropdown">
-          <a
+          
             class="nav-link animet-link dropdown-toggle"
             href="#"
             role="button"
@@ -61,10 +62,9 @@
           </a>
           <ul class="dropdown-menu animet-dropdown">
             {{#each genres}}
-              <li><a
-                  class="dropdown-item"
-                  href="/courses?genre={{this}}"
-                >{{this}}</a></li>
+              <li>
+                <a class="dropdown-item" href="/courses?genre={{this}}">{{this}}</a>
+              </li>
             {{/each}}
           </ul>
         </li>
@@ -85,6 +85,44 @@
           placeholder="Tim: ten phim..."
         />
       </form>
+
+      {{#if currentUser}}
+        <div class="nav-user-dropdown ms-3">
+          <button class="nav-user-btn" id="userDropdownBtn">
+            {{#if currentUser.avatar}}
+              <img src="{{currentUser.avatar}}" class="nav-avatar" />
+            {{else}}
+              <i class="bi bi-person-circle" style="font-size:1.4rem; color:#f0c040;"></i>
+            {{/if}}
+            <span style="color:#fff; font-size:0.85rem;">{{currentUser.username}}</span>
+            <i class="bi bi-chevron-down" style="color:#aaa; font-size:0.7rem;"></i>
+          </button>
+          <ul class="nav-user-menu" id="userMenu">
+            <li>
+              <a href="/user/profile">
+                <i class="bi bi-person-fill"></i> Thông tin tài khoản
+              </a>
+            </li>
+            <li>
+              <a href="/user/watchlist">
+                <i class="bi bi-bookmark-heart-fill"></i> Hộp phim
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="/auth/logout">
+                <i class="bi bi-box-arrow-right"></i> Thoát
+              </a>
+            </li>
+          </ul>
+        </div>
+      {{else}}
+        <div class="auth-nav ms-3 d-flex align-items-center gap-2">
+          <a href="/auth/login" class="auth-nav-btn login">Đăng nhập</a>
+          <a href="/auth/register" class="auth-nav-btn register">Đăng ký</a>
+        </div>
+      {{/if}}
+
     </div>
   </div>
 </nav>

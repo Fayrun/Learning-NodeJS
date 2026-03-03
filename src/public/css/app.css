@@ -30,6 +30,101 @@ body {
   align-items: flex-start;
   gap: 2rem;
 }
+
+.auth-username {
+  color: #f0c040;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.auth-nav-btn {
+  padding: 0.35rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.auth-nav-btn.login {
+  border: 1px solid #f0c040;
+  color: #f0c040;
+}
+
+.auth-nav-btn.login:hover {
+  background: #f0c040;
+  color: #000;
+}
+
+.auth-nav-btn.register {
+  background: #e8000d;
+  color: #fff;
+  border: 1px solid #e8000d;
+}
+
+.auth-nav-btn.register:hover {
+  background: #c0000b;
+}
+
+.auth-nav-btn.logout {
+  border: 1px solid #555;
+  color: #aaa;
+  font-size: 0.82rem;
+}
+
+.auth-nav-btn.logout:hover {
+  border-color: #e8000d;
+  color: #e8000d;
+}
+.nav-user-dropdown { position: relative; }
+
+.nav-user-btn {
+  background: none;
+  border: 1px solid #1a3a4a;
+  border-radius: 8px;
+  padding: 0.3rem 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.nav-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.nav-user-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background: #0e2233;
+  border: 1px solid #1a3a4a;
+  border-radius: 8px;
+  min-width: 200px;
+  list-style: none;
+  padding: 0.4rem 0;
+  z-index: 999;
+}
+
+.nav-user-menu.show { display: block; }
+
+.nav-user-menu li a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 1rem;
+  color: #c0d8e8;
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: background 0.15s;
+}
+
+.nav-user-menu li a:hover { background: #1a3a4a; color: #fff; }
+.nav-user-menu .divider { border-top: 1px solid #1a3a4a; margin: 0.3rem 0; }
 .anime-text-title {
   font-size: 2.5rem;
   font-weight: 900;

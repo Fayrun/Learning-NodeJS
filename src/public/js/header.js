@@ -1,5 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
   try {
+    const btn = document.getElementById("userDropdownBtn");
+    const menu = document.getElementById("userMenu");
+
+    if (btn) {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        menu.classList.toggle("show");
+      });
+
+      document.addEventListener("click", () => {
+        menu.classList.remove("show");
+      });
+    }
     var yearDropdown = document.getElementById("year-dropdown");
     var currentYear = new Date().getFullYear();
     for (var y = currentYear; y >= 2018; y--) {
