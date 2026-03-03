@@ -1,0 +1,172 @@
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <a href="/">AnimeHay</a>
+    </div>
+    <h2 class="auth-title">Đăng nhập</h2>
+    <p class="auth-subtitle">Chào mừng trở lại! Đăng nhập để tiếp tục.</p>
+
+    {{#if error}}
+      <div class="auth-error">
+        <i class="bi bi-exclamation-circle-fill"></i> {{error}}
+      </div>
+    {{/if}}
+
+    <form action="/auth/login" method="POST" class="auth-form">
+      <div class="auth-field">
+        <label>Email</label>
+        <div class="auth-input-wrap">
+          <i class="bi bi-envelope-fill"></i>
+          <input type="email" name="email" placeholder="Nhập email của bạn" required />
+        </div>
+      </div>
+      <div class="auth-field">
+        <label>Mật khẩu</label>
+        <div class="auth-input-wrap">
+          <i class="bi bi-lock-fill"></i>
+          <input type="password" name="password" placeholder="Nhập mật khẩu" required />
+        </div>
+      </div>
+      <button type="submit" class="auth-btn">Đăng nhập</button>
+    </form>
+
+    <p class="auth-footer">
+      Chưa có tài khoản? <a href="/auth/register">Đăng ký ngay</a>
+    </p>
+  </div>
+</div>
+
+<style>
+  .auth-wrapper {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .auth-card {
+    background: #0e2233;
+    border: 1px solid #1a3a4a;
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .auth-logo a {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #e8000d;
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .auth-title {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 1.2rem 0 0.3rem;
+  }
+
+  .auth-subtitle {
+    color: #7a9bb5;
+    font-size: 0.88rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .auth-error {
+    background: rgba(232, 0, 13, 0.12);
+    border: 1px solid rgba(232, 0, 13, 0.4);
+    color: #ff4d55;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    font-size: 0.87rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .auth-field {
+    margin-bottom: 1.1rem;
+  }
+
+  .auth-field label {
+    color: #a0bfd0;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .auth-input-wrap {
+    position: relative;
+  }
+
+  .auth-input-wrap i {
+    position: absolute;
+    left: 0.85rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #4a7a9b;
+    font-size: 0.9rem;
+  }
+
+  .auth-input-wrap input {
+    width: 100%;
+    background: #071825;
+    border: 1px solid #1a3a4a;
+    border-radius: 8px;
+    padding: 0.65rem 0.9rem 0.65rem 2.4rem;
+    color: #fff;
+    font-size: 0.93rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .auth-input-wrap input:focus {
+    border-color: #f0c040;
+  }
+
+  .auth-input-wrap input::placeholder {
+    color: #3a5a6a;
+  }
+
+  .auth-btn {
+    width: 100%;
+    background: #e8000d;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    letter-spacing: 0.5px;
+    transition: background 0.2s;
+  }
+
+  .auth-btn:hover {
+    background: #c0000b;
+  }
+
+  .auth-footer {
+    text-align: center;
+    color: #7a9bb5;
+    font-size: 0.88rem;
+    margin-top: 1.4rem;
+    margin-bottom: 0;
+  }
+
+  .auth-footer a {
+    color: #f0c040;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .auth-footer a:hover {
+    text-decoration: underline;
+  }
+</style>

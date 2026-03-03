@@ -1,9 +1,29 @@
 const newsRouter = require("./NewsRoute");
 const coursesRouter = require("./CoursesRoute");
 const siteRouter = require("./SiteRoute");
+const authRouter = require("./AuthRoute"); // ← thêm
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
+console.log("MongoStore:", MongoStore); // ← thêm dòng này
 
 function route(app) {
-  // Thêm vào trước route(app) trong index.js
+  app.use(
+    session({
+      secret: "your-secret-key",
+      resave: false,
+      saveUninitialized: false,
+      store: MongoStore.create({
+        mongoUrl: "mongodb://localhost:27017/f8_education_dev",
+      }),
+      cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 },
+    }),
+  );
+
+  app.use((req, res, next) => {
+    res.locals.currentUser = req.session.user;
+    next();
+  });
+
   app.use((req, res, next) => {
     res.locals.genres = [
       "Action",
@@ -19,6 +39,8 @@ function route(app) {
     ];
     next();
   });
+
+  app.use("/auth", authRouter); // ← thêm
   app.use("/news", newsRouter);
   app.use("/courses", coursesRouter);
   app.use("/", siteRouter);
