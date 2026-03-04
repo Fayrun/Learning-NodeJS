@@ -27,7 +27,11 @@ app.engine(
     extname: ".hbs",
     helpers: {
       json: (context) => JSON.stringify(context),
-      eq: (a, b) => a === b, // ← thêm dòng này
+      eq: (a, b) => a === b,
+      formatDate: (date) => {
+        if (!date) return "";
+        return new Date(date).toLocaleDateString("vi-VN");
+      },
     },
   }),
 );

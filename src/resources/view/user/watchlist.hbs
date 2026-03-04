@@ -1,0 +1,237 @@
+<div class="container-middle">
+  <div class="container-fluid px-4 mt-4">
+    <div class="profile-wrapper">
+
+      <!-- Sidebar -->
+      <div class="profile-sidebar">
+        <div class="profile-avatar-wrap">
+          {{#if currentUser.avatar}}
+            <img
+              src="{{currentUser.avatar}}"
+              class="profile-avatar"
+              alt="avatar"
+            />
+          {{else}}
+            <div class="profile-avatar-placeholder">
+              <i class="bi bi-person-fill"></i>
+            </div>
+          {{/if}}
+        </div>
+        <p class="profile-username">{{currentUser.username}}</p>
+        <div class="profile-sidebar-links">
+          <a href="/user/profile" class="profile-sidebar-link">
+            <i class="bi bi-person-fill"></i>
+            Thông tin tài khoản
+          </a>
+          <a href="/user/watchlist" class="profile-sidebar-link active">
+            <i class="bi bi-bookmark-heart-fill"></i>
+            Hộp phim
+          </a>
+        </div>
+      </div>
+
+      <!-- Main -->
+      <div class="profile-main">
+        <h2 class="profile-title">
+          <i class="bi bi-bookmark-heart-fill" style="color:#e8000d;"></i>
+          HỘP PHIM
+          <span class="watchlist-count">{{courses.length}} anime</span>
+        </h2>
+
+        {{#if courses.length}}
+          <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
+            {{#each courses}}
+              <div class="col">
+                <div class="anime-card">
+                  <div class="anime-thumb">
+                    <a href="/courses/{{this.slug}}">
+                      <img src="{{this.image}}" alt="{{this.name}}" />
+                    </a>
+                    <div class="anime-badge-ep">TẬP<br /><strong
+                      >{{this.numberOfEpisodes}}</strong></div>
+                    <div class="anime-year-bar">{{this.releaseYear}}</div>
+                    <!-- Nút bỏ theo dõi -->
+                    <button
+                      class="unfollow-btn"
+                      title="Bỏ theo dõi"
+                      onclick="unfollowAnime('{{this._id}}', this)"
+                    >
+                      <i class="bi bi-bookmark-x-fill"></i>
+                    </button>
+                  </div>
+                  <div class="anime-info">
+                    <p class="anime-title">{{this.name}}</p>
+                    <div class="anime-genres">
+                      {{#each this.Genre}}
+                        <span class="anime-genre-badge">{{this}}</span>
+                      {{/each}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        {{else}}
+          <div class="watchlist-empty">
+            <i class="bi bi-bookmark-x"></i>
+            <p>Chưa có anime nào trong hộp phim</p>
+            <a href="/courses" class="auth-nav-btn register">Khám phá anime</a>
+          </div>
+        {{/if}}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  .profile-wrapper {
+    display: flex;
+    gap: 2rem;
+    padding: 1.5rem 0 3rem;
+    align-items: flex-start;
+  }
+
+  .profile-sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    background: #0e2233;
+    border: 1px solid #1a3a4a;
+    border-radius: 12px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+  }
+
+  .profile-avatar-wrap {
+    margin-bottom: 1rem;
+  }
+
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #f0c040;
+  }
+
+  .profile-avatar-placeholder {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #1a3a4a;
+    border: 3px solid #f0c040;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 2.5rem;
+    color: #4a7a9b;
+  }
+
+  .profile-username {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .profile-sidebar-links {
+    border-top: 1px solid #1a3a4a;
+    padding-top: 1rem;
+  }
+
+  .profile-sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #a0bfd0;
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.4rem 0.5rem;
+    border-radius: 6px;
+    transition: background 0.15s;
+    margin-bottom: 0.2rem;
+  }
+
+  .profile-sidebar-link:hover,
+  .profile-sidebar-link.active {
+    background: #1a3a4a;
+    color: #f0c040;
+  }
+
+  .profile-main {
+    flex: 1;
+    background: #0e2233;
+    border: 1px solid #1a3a4a;
+    border-radius: 12px;
+    padding: 2rem;
+  }
+
+  .profile-title {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #f0c040;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .watchlist-count {
+    margin-left: auto;
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: #7a9bb5;
+    letter-spacing: 0;
+  }
+
+  .unfollow-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: none;
+    background: rgba(232, 0, 13, 0.85);
+    color: #fff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 10;
+  }
+
+  .anime-thumb:hover .unfollow-btn {
+    opacity: 1;
+  }
+
+  .watchlist-empty {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #4a7a9b;
+  }
+
+  .watchlist-empty i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .watchlist-empty p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+</style>
+
+<script>
+  async function unfollowAnime(courseId, btn) { try { const res = await
+  fetch(`/courses/${courseId}/follow`, { method: "POST" }); const data = await
+  res.json(); if (!data.following) { btn.closest(".col").remove(); } } catch
+  (err) { console.error(err); } }
+</script>

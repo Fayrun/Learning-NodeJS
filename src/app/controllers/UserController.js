@@ -38,6 +38,11 @@ class UserController {
         updateData,
         { new: true },
       );
+      req.session.user.avatar = updateData.avatar || req.session.user.avatar;
+      res.render("user/profile", {
+        user: user.toObject(),
+        success: "Cập nhật thành công!",
+      });
       req.session.user.username = user.username;
       res.redirect("/user/profile");
     } catch (err) {

@@ -64,10 +64,18 @@ class CourseController {
   async show(req, res) {
     try {
       const course = await Course.findOne({ slug: req.params.slug });
-      if (!course) {
-        return res.status(404).json({ error: "Course not found" });
+      if (!course) return res.status(404).json({ error: "Course not found" });
+
+      let isFollowing = false;
+      if (req.session.user) {
+        const User = require("../models/User");
+        const user = await User.findById(req.session.user.id);
+        isFollowing = user.following
+          .map((id) => id.toString())
+          .includes(course._id.toString());
       }
-      res.render("courses/show", { course: course.toObject() });
+
+      res.render("courses/show", { course: course.toObject(), isFollowing });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

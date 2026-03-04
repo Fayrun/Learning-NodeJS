@@ -4,6 +4,18 @@
     <div class="show-hero-inner">
 
       <div class="show-poster">
+        <!-- Nút theo dõi góc trên trái -->
+        {{#if currentUser}}
+          <button
+            class="follow-btn {{#if isFollowing}}following{{/if}}"
+            id="followBtn"
+            onclick="toggleFollow('{{course._id}}')"
+          >
+            <i class="bi {{#if isFollowing}}bi-bookmark-heart-fill{{else}}bi-bookmark-heart{{/if}}"></i>
+            <span>{{#if isFollowing}}Đã theo dõi{{else}}Theo dõi{{/if}}</span>
+          </button>
+        {{/if}}
+
         <img src="{{course.image}}" alt="{{course.name}}" />
         <a href="#course-video" class="show-watch-btn">XEM PHIM</a>
       </div>
@@ -22,19 +34,19 @@
         </div>
 
         <div class="show-rating-bar">
-  <div class="show-rating-left">
-    <div class="show-score">86%</div>
-    <div class="show-stars">
-      <span class="stars">★★★★★★★★★☆</span>
-      <small>(72 luot, danh gia: 8.6 tren 10)</small>
-    </div>
-  </div>
-  <div class="show-meta">
-    <span><i class="bi bi-clock"></i> {{course.duration}} Phut</span>
-    <span><i class="bi bi-calendar"></i> {{course.releaseYear}}</span>
-    <span><i class="bi bi-eye"></i> 93,280 luot xem</span>
-  </div>
-</div>
+          <div class="show-rating-left">
+            <div class="show-score">86%</div>
+            <div class="show-stars">
+              <span class="stars">★★★★★★★★★☆</span>
+              <small>(72 luot, danh gia: 8.6 tren 10)</small>
+            </div>
+          </div>
+          <div class="show-meta">
+            <span><i class="bi bi-clock"></i> {{course.duration}} Phut</span>
+            <span><i class="bi bi-calendar"></i> {{course.releaseYear}}</span>
+            <span><i class="bi bi-eye"></i> 93,280 luot xem</span>
+          </div>
+        </div>
 
       </div>
 
@@ -88,3 +100,69 @@
   </div>
 </div>
 </div>
+
+<style>
+  .follow-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(10, 20, 40, 0.82);
+    border: 1.5px solid #4a7a9b;
+    color: #c0d8e8;
+    border-radius: 20px;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    backdrop-filter: blur(4px);
+  }
+
+  .follow-btn:hover {
+    border-color: #f0c040;
+    color: #f0c040;
+  }
+
+  .follow-btn.following {
+    background: rgba(106, 0, 255, 0.75);
+    border-color: #7c3aed;
+    color: #fff;
+  }
+
+  .follow-btn.following:hover {
+    background: rgba(232, 0, 13, 0.75);
+    border-color: #e8000d;
+    color: #fff;
+  }
+
+  .follow-btn i { font-size: 0.95rem; }
+</style>
+
+<script>
+async function toggleFollow(courseId) {
+  const btn = document.getElementById("followBtn");
+  const icon = btn.querySelector("i");
+  const label = btn.querySelector("span");
+
+  try {
+    const res = await fetch(`/courses/${courseId}/follow`, { method: "POST" });
+    const data = await res.json();
+
+    if (data.following) {
+      btn.classList.add("following");
+      icon.className = "bi bi-bookmark-heart-fill";
+      label.textContent = "Đã theo dõi";
+    } else {
+      btn.classList.remove("following");
+      icon.className = "bi bi-bookmark-heart";
+      label.textContent = "Theo dõi";
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+</script>
