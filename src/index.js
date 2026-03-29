@@ -3,22 +3,39 @@ const morgan = require("morgan");
 const cors = require("cors");
 const path = require("path");
 const { engine } = require("express-handlebars");
+const session = require("express-session"); // ← THÊM
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 const route = require("./routes");
 const db = require("./config/db");
-console.log("Before connect");
 db.connectToDatabase();
-console.log("After connect");
+
 // STATIC FILES
 app.use("/img", express.static(path.join(__dirname, "public/img")));
+app.use(express.static(path.join(__dirname, "public"))); // ← bỏ "src/" đi
 
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "src/public")));
 // HTTP logger
 app.use(morgan("combined"));
+
+// BODY PARSER
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// SESSION ← phải đặt trước setCurrentUser
+app.use(
+  session({
+    secret: "your_secret_key", // đổi thành string bất kỳ, nên dùng env
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 }, // 7 ngày
+  }),
+);
+
+// SET CURRENT USER ← sau session
+const { setCurrentUser } = require("./app/middlewares/authMiddleware");
+app.use(setCurrentUser);
 
 // TEMPLATE ENGINE
 app.engine(
@@ -38,17 +55,10 @@ app.engine(
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "resources/view"));
 
-// BODY PARSER
-app.use(
-  express.urlencoded({
-    extended: true,
-  }),
-);
-app.use(express.json());
+app.use(cors());
+
 // ROUTE
 route(app);
-
-app.use(cors());
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

@@ -21,11 +21,6 @@ function route(app) {
   );
 
   app.use((req, res, next) => {
-    res.locals.currentUser = req.session.user;
-    next();
-  });
-
-  app.use((req, res, next) => {
     res.locals.genres = [
       "Action",
       "Shounen",
